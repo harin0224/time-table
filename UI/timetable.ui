@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>Timetable</class>
+ <widget class="QMainWindow" name="Timetable">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1115</width>
-    <height>1315</height>
+    <width>1111</width>
+    <height>1277</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Timetable</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTableWidget" name="tableWidget">
+   <widget class="QTableWidget" name="time_table">
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>120</y>
+      <y>90</y>
       <width>1111</width>
       <height>1126</height>
      </rect>
@@ -145,74 +145,48 @@
     </row>
     <column>
      <property name="text">
-      <string>월</string>
+      <string>Monday</string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>화</string>
+      <string>Tuesday</string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>수</string>
+      <string>Wednesday</string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>목</string>
+      <string>Thursday</string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>금</string>
+      <string>Friday</string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>토</string>
+      <string>Saturday</string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>일</string>
+      <string>Sunday</string>
      </property>
     </column>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QTextEdit" name="textdate">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>15</y>
-      <width>166</width>
-      <height>46</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>PushButton</string>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="textEdit">
-    <property name="geometry">
-     <rect>
-      <x>15</x>
-      <y>15</y>
-      <width>256</width>
+      <x>0</x>
+      <y>0</y>
+      <width>181</width>
       <height>91</height>
      </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_2">
-    <property name="geometry">
-     <rect>
-      <x>480</x>
-      <y>15</y>
-      <width>166</width>
-      <height>46</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>PushButton</string>
     </property>
    </widget>
   </widget>
@@ -221,12 +195,54 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1115</width>
+     <width>1111</width>
      <height>31</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>save</string>
+    </property>
+    <addaction name="save_time_act"/>
+    <addaction name="time_table_act"/>
+   </widget>
+   <widget class="QMenu" name="menudata">
+    <property name="title">
+     <string>data</string>
+    </property>
+    <addaction name="copy_the_time_table_act"/>
+    <addaction name="load_the_time_table_act"/>
+    <addaction name="actioncalendar"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menudata"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="save_time_act">
+   <property name="text">
+    <string>save time</string>
+   </property>
+  </action>
+  <action name="time_table_act">
+   <property name="text">
+    <string>save time table</string>
+   </property>
+  </action>
+  <action name="copy_the_time_table_act">
+   <property name="text">
+    <string>copy the time table</string>
+   </property>
+  </action>
+  <action name="load_the_time_table_act">
+   <property name="text">
+    <string>load the time table</string>
+   </property>
+  </action>
+  <action name="actioncalendar">
+   <property name="text">
+    <string>calendar</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
