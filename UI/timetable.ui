@@ -546,30 +546,23 @@
    </property>
    <widget class="QMenu" name="menu">
     <property name="title">
-     <string>save</string>
+     <string>tool</string>
     </property>
-    <addaction name="save_time_act"/>
-    <addaction name="time_table_act"/>
-   </widget>
-   <widget class="QMenu" name="menudata">
-    <property name="title">
-     <string>data</string>
-    </property>
-    <addaction name="copy_the_time_table_act"/>
+    <addaction name="save_act"/>
+    <addaction name="save_as_act"/>
     <addaction name="load_the_time_table_act"/>
     <addaction name="actioncalendar"/>
    </widget>
    <addaction name="menu"/>
-   <addaction name="menudata"/>
   </widget>
-  <action name="save_time_act">
+  <action name="save_act">
    <property name="text">
-    <string>save time</string>
+    <string>save</string>
    </property>
   </action>
-  <action name="time_table_act">
+  <action name="save_as_act">
    <property name="text">
-    <string>save time table</string>
+    <string>save as</string>
    </property>
   </action>
   <action name="copy_the_time_table_act">
@@ -579,7 +572,7 @@
   </action>
   <action name="load_the_time_table_act">
    <property name="text">
-    <string>load the time table</string>
+    <string>load</string>
    </property>
   </action>
   <action name="actioncalendar">
