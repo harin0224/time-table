@@ -4,7 +4,8 @@ import datetime
 from PyQt5.QtCore import Qt
 from PyQt5 import QtGui, QtCore
 import dialogs, widgets
-import json
+import json, os
+from shutil import copyfile
 
 #UI파일 연결 코드
 timeTableUI = uic.loadUiType("UI/timetable.ui")[0]
@@ -15,9 +16,12 @@ class MainWindow(QMainWindow, timeTableUI) :
         self.setupUi(self)
         self.selRow = None
         self.selColumn = None
+        self.fileName = None
         self.colorPalette = [(222,164,144),(222,220,189),(255,207,191),(139,195,74),
                              (255,207,153),(140,161,255),(255,253,191),(189,153,255)]
         self.colorCnt = 0
+        
+        os.makedirs(os.path.expanduser('~/Documents/Timetable'), exist_ok=True)
         
         #시간 표시
         time = datetime.datetime.now().date()
@@ -28,7 +32,7 @@ class MainWindow(QMainWindow, timeTableUI) :
         self.load_the_time_table_act.triggered.connect(self.openListWidget)
         #액션바
         self.save_act.triggered.connect(self.saveFiles)
-        #self.save_as_act.triggered.connect()
+        self.save_as_act.triggered.connect(self.saveAs)
         #self.load_act.triggered.connect()
         #self.calendar_act.triggered.connect()
         
@@ -67,35 +71,51 @@ class MainWindow(QMainWindow, timeTableUI) :
                 selRowColor = index.row()
                 selColumnColor = index.column()
                 self.time_table.setItem(selRowColor, selColumnColor, QTableWidgetItem())
-            
+
+    def getTableData(self) :
+        result = {}
+        for i in range(self.time_table.rowCount()):
+            for j in range(self.time_table.columnCount()):
+                item = self.time_table.item(i,j)
+                if item is None:
+                    continue
+                label = self.time_table.horizontalHeaderItem(j).text()
+                print('label : ', label)
+                
+                color = item.background().color().getRgb()
+                if label not in result :
+                    result[label] = []
+                temp = {
+                    "row":i,
+                    "column":j,
+                    "text":item.text(),
+                    "color":{
+                        "r":color[0],
+                        "g":color[1],
+                        "b":color[2],
+                    },
+                }
+                result[label].append(temp)
+        return result        
+                        
+    def getFilePath(self, fileName):
+        return os.path.expanduser('~/Documents/Timetable/' + fileName + '.json')
+    
     def saveFiles(self) :
+        result = self.getTableData()
+        if self.fileName is None:
+            self.typingNameWidget = dialogs.TypingNameWidget()
+            if self.typingNameWidget.exec_():
+                self.fileName = self.typingNameWidget.name_text.text()     
+
+        with open(self.getFilePath(self.fileName), 'w') as json_file:
+            json.dump(result, json_file)
+         
+    def saveAs(self) :    
         self.typingNameWidget = dialogs.TypingNameWidget()
         if self.typingNameWidget.exec_():
-            self.enterName = self.typingNameWidget.name_text.text()
+            result = self.getTableData()                                   
+            self.fileName = self.typingNameWidget.name_text.text()
             
-            result = {}
-            for i in range(self.time_table.rowCount()):
-                for j in range(self.time_table.columnCount()):
-                    item = self.time_table.item(i,j)
-                    if item is None:
-                        continue
-                    label = self.time_table.horizontalHeaderItem(j).text()
-                    print('label : ', label)
-                    
-                    color = item.background().color().getRgb()
-                    if label not in result :
-                        result[label] = []
-                    temp = {
-                        "row":i,
-                        "column":j,
-                        "text":item.text(),
-                        "color":{
-                            "r":color[0],
-                            "g":color[1],
-                            "b":color[2],
-                        },
-                    }
-                    #print(result[label])
-                    result[label].append(temp)
-            with open(self.enterName + ".json", "w") as json_file:
-                json.dump(result, json_file)
+            with open(self.getFilePath(self.fileName), 'w') as json_file:
+                   json.dump(result, json_file)
