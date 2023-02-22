@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ListWidget</class>
- <widget class="QWidget" name="ListWidget">
+ <class>table_list</class>
+ <widget class="QWidget" name="table_list">
   <property name="geometry">
    <rect>
     <x>0</x>

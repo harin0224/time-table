@@ -10,8 +10,3 @@ class CalendarWidget(QWidget, calendarUI) :
     def __init__(self) :
         super().__init__()
         self.setupUi(self)
-              
-class TableListWidget(QWidget, tableListUI) :
-    def __init__(self) :
-        super().__init__()
-        self.setupUi(self)

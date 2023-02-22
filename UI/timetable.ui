@@ -550,7 +550,7 @@
     </property>
     <addaction name="save_act"/>
     <addaction name="save_as_act"/>
-    <addaction name="load_the_time_table_act"/>
+    <addaction name="load_act"/>
     <addaction name="actioncalendar"/>
    </widget>
    <addaction name="menu"/>
@@ -570,7 +570,7 @@
     <string>copy the time table</string>
    </property>
   </action>
-  <action name="load_the_time_table_act">
+  <action name="load_act">
    <property name="text">
     <string>load</string>
    </property>

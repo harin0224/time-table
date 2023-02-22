@@ -26,14 +26,11 @@ class MainWindow(QMainWindow, timeTableUI) :
         #시간 표시
         time = datetime.datetime.now().date()
         self.textdate.setText(str(time))
-        #캘린더 팝업
-        self.actioncalendar.triggered.connect(self.openCalendarWidget)
-        #시간표 리스트 팝업
-        self.load_the_time_table_act.triggered.connect(self.openListWidget)
+
         #액션바
         self.save_act.triggered.connect(self.saveFiles)
         self.save_as_act.triggered.connect(self.saveAs)
-        #self.load_act.triggered.connect()
+        self.load_act.triggered.connect(self.openListWidget)
         #self.calendar_act.triggered.connect()
         
     def openCalendarWidget (self) :
@@ -41,7 +38,7 @@ class MainWindow(QMainWindow, timeTableUI) :
         self.calendarWidget.show()
     
     def openListWidget (self) :
-        self.tableListWidget = widgets.TableListWidget()
+        self.tableListWidget = dialogs.TableListWidget()
         self.tableListWidget.show()
         
     def openTypingScheduleWidget (self) :
@@ -80,7 +77,6 @@ class MainWindow(QMainWindow, timeTableUI) :
                 if item is None:
                     continue
                 label = self.time_table.horizontalHeaderItem(j).text()
-                print('label : ', label)
                 
                 color = item.background().color().getRgb()
                 if label not in result :
@@ -108,8 +104,8 @@ class MainWindow(QMainWindow, timeTableUI) :
             if self.typingNameWidget.exec_():
                 self.fileName = self.typingNameWidget.name_text.text()     
 
-        with open(self.getFilePath(self.fileName), 'w') as json_file:
-            json.dump(result, json_file)
+                with open(self.getFilePath(self.fileName), 'w') as json_file:
+                    json.dump(result, json_file)
          
     def saveAs(self) :    
         self.typingNameWidget = dialogs.TypingNameWidget()
