@@ -1,6 +1,5 @@
 from PyQt5.QtWidgets import *
 from PyQt5 import uic   # ui 파일을 사용하기 위한 모듈 import
-import datetime
 from PyQt5.QtCore import Qt
 from PyQt5 import QtGui, QtCore
 import dialogs, widgets
@@ -10,7 +9,7 @@ from shutil import copyfile
 #UI파일 연결 코드
 timeTableUI = uic.loadUiType("UI/timetable.ui")[0]
 
-class MainWindow(QMainWindow, timeTableUI) :
+class MainWindow(QWidget, timeTableUI) :
     def __init__(self) :
         super().__init__()
         self.setupUi(self)
@@ -24,8 +23,8 @@ class MainWindow(QMainWindow, timeTableUI) :
         os.makedirs(os.path.expanduser('~/Documents/Timetable'), exist_ok=True)
         
         #시간 표시
-        time = datetime.datetime.now().date()
-        self.textdate.setText(str(time))
+        #time = datetime.datetime.now().date()
+        #self.textdate.setText(str(time))
 
         #액션바
         self.save_act.triggered.connect(self.saveFiles)
@@ -68,6 +67,7 @@ class MainWindow(QMainWindow, timeTableUI) :
                 selRowColor = index.row()
                 selColumnColor = index.column()
                 self.time_table.setItem(selRowColor, selColumnColor, QTableWidgetItem())
+                self.time_table.item(selRowColor, selColumnColor).setBackground(QtGui.QColor(255,255,255))
 
     def getTableData(self) :
         result = {}
@@ -115,3 +115,11 @@ class MainWindow(QMainWindow, timeTableUI) :
             
             with open(self.getFilePath(self.fileName), 'w') as json_file:
                    json.dump(result, json_file)
+
+    def setTableData(self, data) :
+        for day in data:
+            for index in data[day]:
+                self.time_table.setItem(index['row'], index['column'], QTableWidgetItem(index['text']))
+                self.time_table.item(index['row'], index['column']).setBackground(
+                    QtGui.QColor(index['color']['r'], index['color']['g'], index['color']['b'])
+                )

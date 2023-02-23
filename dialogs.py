@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic   # ui 파일을 사용하기 위한 모듈 import
 import os
 import mainWindow
+import sys, json
 
 #UI파일 연결 코드
 typingScheduleUI = uic.loadUiType("UI/typingschedule.ui")[0]
@@ -34,24 +35,27 @@ class TableListWidget(QDialog, tableListUI) :
         self.showTableNames()
         self.Load_btn.clicked.connect(self.loadFile)
         #self.Del_btn.clicked.connect() 
-        #self.loadFile()
-        
-        
+        #self.loadFile()      
         
     def getTableNames (self) :
         pathDir = os.path.expanduser('~/Documents/Timetable')
         fileList = os.listdir(pathDir)
         return fileList
         
-    
     def showTableNames (self) :
         for index in self.getTableNames() :
             self.listWidget.addItem(index)
             
     def loadFile (self) :
+        fileName = self.listWidget.selectedItems()[0].text()
+        data = None
+        with open(os.path.expanduser('~/Documents/Timetable/' + fileName)) as json_file:
+            data = json.load(json_file)
+        self.main = mainWindow.MainWindow()
+        self.main.setTableData(data)
+        self.main.fileName = fileName
+        self.main.show()
         
-        fileName = self.listWidget.selectedItems()
-        print(fileName[0].text())
         
 
 
