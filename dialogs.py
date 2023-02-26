@@ -24,7 +24,7 @@ class TypingNameWidget(QDialog, typingNameUI) :
         self.setupUi(self)
         self.name_text.setFocus()
         self.ok_btn.clicked.connect(self.accept) 
-        self.cancel_btn.clicked.connect(self.reject)       
+        self.cancel_btn.clicked.connect(self.reject)    
 
 class TableListWidget(QDialog, tableListUI) :
     def __init__(self) :
@@ -34,8 +34,7 @@ class TableListWidget(QDialog, tableListUI) :
         self.getTableNames()
         self.showTableNames()
         self.Load_btn.clicked.connect(self.loadFile)
-        #self.Del_btn.clicked.connect() 
-        #self.loadFile()      
+        self.Del_btn.clicked.connect(self.deleteFile)  
         
     def getTableNames (self) :
         pathDir = os.path.expanduser('~/Documents/Timetable')
@@ -43,6 +42,7 @@ class TableListWidget(QDialog, tableListUI) :
         return fileList
         
     def showTableNames (self) :
+        self.listWidget.clear()
         for index in self.getTableNames() :
             self.listWidget.addItem(index)
             
@@ -56,7 +56,10 @@ class TableListWidget(QDialog, tableListUI) :
         self.main.fileName = fileName
         self.main.show()
         
-        
+    def deleteFile (self) :
+        fileName = self.listWidget.selectedItems()[0].text()
+        os.remove(os.path.expanduser('~/Documents/Timetable/' + fileName))
+        self.showTableNames()
 
 
         

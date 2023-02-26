@@ -95,23 +95,23 @@ class MainWindow(QWidget, timeTableUI) :
         return result        
                         
     def getFilePath(self, fileName):
-        return os.path.expanduser('~/Documents/Timetable/' + fileName + '.json')
+        return os.path.expanduser('~/Documents/Timetable/' + fileName)
     
     def saveFiles(self) :
         result = self.getTableData()
         if self.fileName is None:
             self.typingNameWidget = dialogs.TypingNameWidget()
             if self.typingNameWidget.exec_():
-                self.fileName = self.typingNameWidget.name_text.text()     
+                self.fileName = self.typingNameWidget.name_text.text() + ".json"
 
-                with open(self.getFilePath(self.fileName), 'w') as json_file:
-                    json.dump(result, json_file)
+        with open(self.getFilePath(self.fileName), 'w') as json_file:
+            json.dump(result, json_file)
          
     def saveAs(self) :    
         self.typingNameWidget = dialogs.TypingNameWidget()
         if self.typingNameWidget.exec_():
             result = self.getTableData()                                   
-            self.fileName = self.typingNameWidget.name_text.text()
+            self.fileName = self.typingNameWidget.name_text.text() + ".json"
             
             with open(self.getFilePath(self.fileName), 'w') as json_file:
                    json.dump(result, json_file)
