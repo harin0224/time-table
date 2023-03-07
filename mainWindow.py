@@ -4,7 +4,6 @@ from PyQt5.QtCore import Qt
 from PyQt5 import QtGui, QtCore
 import dialogs, widgets
 import json, os
-from shutil import copyfile
 
 #UI파일 연결 코드
 timeTableUI = uic.loadUiType("UI/timetable.ui")[0]
@@ -12,6 +11,9 @@ timeTableUI = uic.loadUiType("UI/timetable.ui")[0]
 class MainWindow(QWidget, timeTableUI) :
     def __init__(self) :
         super().__init__()
+        with open("stylesheet.css", 'r') as f:
+            self.setStyleSheet(f.read())
+        
         self.setupUi(self)
         self.selRow = None
         self.selColumn = None
@@ -98,14 +100,18 @@ class MainWindow(QWidget, timeTableUI) :
         return os.path.expanduser('~/Documents/Timetable/' + fileName)
     
     def saveFiles(self) :
+        isCancel = True
         result = self.getTableData()
         if self.fileName is None:
             self.typingNameWidget = dialogs.TypingNameWidget()
             if self.typingNameWidget.exec_():
                 self.fileName = self.typingNameWidget.name_text.text() + ".json"
-
-        with open(self.getFilePath(self.fileName), 'w') as json_file:
-            json.dump(result, json_file)
+            else :
+                isCancel = False
+                
+        if isCancel :
+            with open(self.getFilePath(self.fileName), 'w') as json_file:
+                json.dump(result, json_file)
          
     def saveAs(self) :    
         self.typingNameWidget = dialogs.TypingNameWidget()

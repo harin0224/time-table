@@ -10,6 +10,11 @@
     <height>1356</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>4</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Timetable</string>
   </property>
@@ -39,7 +44,8 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>6</pointsize>
+      <family>Arial</family>
+      <pointsize>8</pointsize>
      </font>
     </property>
     <property name="verticalScrollBarPolicy">
@@ -54,22 +60,10 @@
     <property name="autoScroll">
      <bool>true</bool>
     </property>
-    <attribute name="horizontalHeaderVisible">
-     <bool>true</bool>
-    </attribute>
-    <attribute name="horizontalHeaderCascadingSectionResizes">
-     <bool>true</bool>
-    </attribute>
     <attribute name="horizontalHeaderDefaultSectionSize">
      <number>134</number>
     </attribute>
-    <attribute name="horizontalHeaderMinimumSectionSize">
-     <number>38</number>
-    </attribute>
     <attribute name="verticalHeaderDefaultSectionSize">
-     <number>27</number>
-    </attribute>
-    <attribute name="verticalHeaderMinimumSectionSize">
      <number>27</number>
     </attribute>
     <row>
@@ -608,7 +602,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
+       <pointsize>9</pointsize>
        <weight>75</weight>
        <bold>true</bold>
        <kerning>true</kerning>
@@ -621,7 +615,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
+       <pointsize>9</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -633,7 +627,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
+       <pointsize>9</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -645,7 +639,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
+       <pointsize>9</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -657,7 +651,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
+       <pointsize>9</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -669,7 +663,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
+       <pointsize>9</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -681,7 +675,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
+       <pointsize>9</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
