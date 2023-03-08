@@ -3,6 +3,7 @@ from PyQt5 import uic   # ui 파일을 사용하기 위한 모듈 import
 from PyQt5.QtCore import Qt
 from PyQt5 import QtGui, QtCore
 import dialogs, widgets, json, os, math
+
 import common
 from tkinter import *
 
@@ -18,7 +19,7 @@ class MainWindow(QWidget, timeTableUI) :
         super().__init__()
         # with open("stylesheet.css", 'r') as f:
         #     self.setStyleSheet(f.read())
-        
+        #self.setWindowIcon(QIcon(common.getResourcePath('meow.ico')))
         self.setupUi(self)
         self.selRow = None
         self.selColumn = None

@@ -2,7 +2,7 @@
 
 
 block_cipher = None
-addfiles = [('UI/timetable.ui', 'UI/'),('UI/typingschedule.ui', 'UI/'),('UI/typingname.ui', 'UI/'),('UI/tablelist.ui', 'UI/')]
+addfiles = [('UI/*', 'UI/')]
 
 a = Analysis(
     ['main.py'],
@@ -41,4 +41,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
+    icon=['meow.ico']
 )
