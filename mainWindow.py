@@ -2,17 +2,22 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic   # ui 파일을 사용하기 위한 모듈 import
 from PyQt5.QtCore import Qt
 from PyQt5 import QtGui, QtCore
-import dialogs, widgets
-import json, os
+import dialogs, widgets, json, os, math
+import common
+from tkinter import *
 
+# root = Tk()
+
+# monitor_height = root.winfo_screenheight()
+# monitor_width = root.winfo_screenwidth()
 #UI파일 연결 코드
-timeTableUI = uic.loadUiType("UI/timetable.ui")[0]
+timeTableUI = common.getUIFile("UI/timetable.ui")
 
 class MainWindow(QWidget, timeTableUI) :
     def __init__(self) :
         super().__init__()
-        with open("stylesheet.css", 'r') as f:
-            self.setStyleSheet(f.read())
+        # with open("stylesheet.css", 'r') as f:
+        #     self.setStyleSheet(f.read())
         
         self.setupUi(self)
         self.selRow = None
@@ -33,6 +38,17 @@ class MainWindow(QWidget, timeTableUI) :
         self.save_as_act.triggered.connect(self.saveAs)
         self.load_act.triggered.connect(self.openListWidget)
         #self.calendar_act.triggered.connect()
+        
+        # self.setFixedHeight(math.floor(monitor_height * 0.9))
+        # self.setFixedWidth(math.floor(monitor_width * 0.4))
+        self.initTable()
+        
+    def initTable(self) :
+        table: QTableWidget = self.time_table
+        
+        for i in range(self.time_table.rowCount()):
+            table.setRowHeight(i, math.floor(table.height() / table.rowCount()))
+            
         
     def openCalendarWidget (self) :
         self.calendarWidget = widgets.CalendarWidget()

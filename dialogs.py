@@ -1,13 +1,13 @@
 from PyQt5.QtWidgets import *
 from PyQt5 import uic   # ui 파일을 사용하기 위한 모듈 import
 import os
-import mainWindow
-import sys, json
+import mainWindow, common
+import json
 
 #UI파일 연결 코드
-typingScheduleUI = uic.loadUiType("UI/typingschedule.ui")[0]
-typingNameUI = uic.loadUiType("UI/typingname.ui")[0]
-tableListUI = uic.loadUiType("UI/tablelist.ui")[0]
+typingScheduleUI = common.getUIFile("UI/typingschedule.ui")
+typingNameUI = common.getUIFile("UI/typingname.ui")
+tableListUI = common.getUIFile("UI/tablelist.ui")
 
 
 class TypingScheduleWidget(QDialog, typingScheduleUI) :
